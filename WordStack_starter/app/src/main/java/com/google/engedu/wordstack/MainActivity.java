@@ -17,8 +17,9 @@ package com.google.engedu.wordstack;
 
 import android.content.res.AssetManager;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -33,7 +34,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Stack;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -56,11 +56,19 @@ public class MainActivity extends AppCompatActivity {
             String line = null;
             while((line = in.readLine()) != null) {
                 String word = line.trim();
-                /**
-                 **
-                 **  YOUR CODE GOES HERE
-                 **
-                 **/
+                    if (isGoodWord(word))
+                    {
+                        //System.out.println(word);
+                        words.add(word);
+
+                    }
+                /* else
+                {
+                Log.d("Rejected: ", word);
+                }
+                Log.d("Added: ",words.toString());
+*/
+
             }
         } catch (IOException e) {
             Toast toast = Toast.makeText(this, "Could not load dictionary", Toast.LENGTH_LONG);
@@ -147,9 +155,50 @@ public class MainActivity extends AppCompatActivity {
          **
          **  YOUR CODE GOES HERE
          **
+         * onStartGame
+         * Next, start implementing onStartGame.
+         * You will need to randomly pick two words from words
+         * (be sure to store them in the fields named word1
+         * and word2 so that the answer is given when the game is over).
+         * Find a way to shuffle the letters of the words while preserving word order.
+         * The simplest way to do that is probably to create a counter for each word
+         * and randomly pick which word to grab a letter from and increment that counter
+         * until either word runs out and then pick all the letters in the word that
+         * was not exhausted. Write your scrambled string to the messageBox.
+         *
+         * Instead of just printing the scrambled string to messageBox,
+         * create new LetterTile objects representing each letter of the
+         * string and push them (in reverse order!) onto stackedLayout.
          **/
+
+       word1 =  words.get((int) (Math.random()*words.size()));
+       word2 = words.get((int) (Math.random()*words.size()));
+
+        Log.d("word 1", word1);
+        Log.d("word 2", word2);
+        Log.d(null," ");
+
+        int counterWord1 = word1.length();
+        int counterWord2 = word2.length();
+        char[] w1charArr = word1.toCharArray();
+        char[] w2charArr = word2.toCharArray();
+        char[] wordsarr = new char[counterWord1+counterWord2];
+        //char comboCharArr;
+        while( ((counterWord1 != 0) && (counterWord2 != 0)))
+        {
+                    int idx1 = (int) (Math.random()*w1charArr.length);
+            int idx2 = (int) (Math.random()*w2charArr.length);
+
+            String tmp = word1.toString().charAt(idx1).concat(word2.toString().charAt(idx2));
+            wordsarr[Math.abs(idx1%idx2)] = tmp;
+
+        }
+        Log.d("wordsarr output", wordsarr);
+
+
         return true;
     }
+
 
     public boolean onUndo(View view) {
         /**
@@ -159,4 +208,11 @@ public class MainActivity extends AppCompatActivity {
          **/
         return true;
     }
+
+    public boolean isGoodWord (String word)
+    {
+        return word.length() <= WORD_LENGTH;
+
+    }
 }
+
