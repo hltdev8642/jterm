@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:elevation="3dp"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_weight="0.18"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:divider="@android:drawable/divider_horizontal_textfield"
+            android:orientation="vertical"
+            android:showDividers="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.09"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnScoreLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:text="@string/your_score"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textColor="#AE0010"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/btnScoreNum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#2c2b2a"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textColor="#AE0010"
+                    android:textSize="18sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.09"
+                android:divider="@android:drawable/divider_horizontal_bright"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnScoreTurnLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:text="@string/turn_score"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+                    android:textColor="#AE0010"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/btnScoreTurnNum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#2c2b2a"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textColor="#AE0010"
+                    android:textSize="18sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.09"
+                android:divider="@android:drawable/divider_horizontal_bright"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnScoreCompLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:text="@string/computer_score"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+                    android:textColor="#AE0010"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/btnScoreCompNum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#2c2b2a"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textColor="#AE0010"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.81"
+                android:background="#2c2b2a"
+                android:scaleType="center"
+                app:srcCompat="@drawable/dice1" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.81"
+        android:background="#2c2b2a"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnRoll"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:alpha="0.90"
+            android:backgroundTint="#CF0010"
+            android:text="ROLL" />
+
+        <Button
+            android:id="@+id/btnHold"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:alpha="0.90"
+            android:backgroundTint="#CF0010"
+            android:text="HOLD" />
+
+        <Button
+            android:id="@+id/btnReset"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:alpha="0.90"
+            android:backgroundTint="#CF0010"
+            android:text="RESET" />
+    </LinearLayout>
+</LinearLayout>

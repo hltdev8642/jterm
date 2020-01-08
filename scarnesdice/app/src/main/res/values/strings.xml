@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">scarnesdice</string>
+    <string name="user_overall_score_state">0</string>
+    <string name="user_turn_score">0</string>
+    <string name="computer_overall_score">0</string>
+    <string name="computer_turn_score">0</string>
+    <string name="your_score">Your Score:</string>
+    <string name="computer_score">Computer Score:</string>
+    <string name="turn_score">Turn Score:</string>
+</resources>
