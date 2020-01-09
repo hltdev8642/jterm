@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
         {
             Button userScore = (Button)findViewById(R.id.btnScoreNum);
             Button computerScore = (Button)findViewById(R.id.btnScoreCompNum);
+            Button btnFinalScoreText = (Button) findViewById(R.id.btnFinalScore);
+
 
 
             @Override
@@ -61,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 computerTurnScore = 0;
                 userScore.setText(String.format("%s",userOverallScoreState));
                 computerScore.setText(String.format("%s",computerOverallScore));
+                btnFinalScoreText.setText(String.format("%s", " "));
             }
 
 
@@ -99,22 +102,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void rollDice(int type) {
-         Button btnTurnScore = (Button) findViewById(R.id.btnScoreNum);
+         Button btnTurnScore = (Button) findViewById(R.id.btnScoreTurnNum);
          Button btnComputerTurnScore = (Button) findViewById(R.id.btnScoreCompNum);
+         Button btnFinalScoreText = (Button) findViewById(R.id.btnFinalScore);
         int status = checkWinner(userOverallScoreState,computerOverallScore);
         if (status == 0)
         {
             Log.d("Winner is: ", "user" );
-            btnTurnScore.setText(String.format("%s","Winner"));
-            btnComputerTurnScore.setText(String.format("%s","Loser"));
+            /*btnTurnScore.setText(String.format("%s","Winner"));
+            btnComputerTurnScore.setText(String.format("%s","Loser"));*/
+            btnFinalScoreText.setText(String.format("%s","User Wins!"));
             return;
         }
 
        else if (status == 1)
         {
             Log.d("Winner is: ", "computer" );
-            btnTurnScore.setText(String.format("%s","Loser"));
-            btnComputerTurnScore.setText(String.format("%s","Winner"));
+          /*  btnTurnScore.setText(String.format("%s","Loser"));
+            btnComputerTurnScore.setText(String.format("%s","Winner"));*/
+            btnFinalScoreText.setText(String.format("%s","Computer Wins!"));
+
             return;
 
         }

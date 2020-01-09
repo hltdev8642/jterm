@@ -101,7 +101,16 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textColor="#AE0010"
                     android:textSize="18sp" />
+
             </LinearLayout>
+
+            <Button
+                android:id="@+id/btnFinalScore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#2c2b2a"
+                android:textColor="#3DAE00"
+                android:textSize="18sp" />
 
             <ImageView
                 android:id="@+id/imageView"
@@ -111,6 +120,7 @@
                 android:background="#2c2b2a"
                 android:scaleType="center"
                 app:srcCompat="@drawable/dice1" />
+
         </LinearLayout>
 
     </LinearLayout>
