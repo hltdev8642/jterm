@@ -62,12 +62,13 @@ public class MainActivity extends AppCompatActivity {
                         words.add(word);
 
                     }
-                /* else
+                /*
+                else
                 {
                 Log.d("Rejected: ", word);
                 }
                 Log.d("Added: ",words.toString());
-*/
+                */
 
             }
         } catch (IOException e) {
@@ -176,8 +177,9 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d("word 1", word1);
         Log.d("word 2", word2);
-        Log.d(null," ");
+        //Log.d(null," ");
 
+        /*
         int counterWord1 = word1.length();
         int counterWord2 = word2.length();
         char[] w1charArr = word1.toCharArray();
@@ -194,13 +196,71 @@ public class MainActivity extends AppCompatActivity {
 
         }
         Log.d("wordsarr output", wordsarr);
+    */
 
+       int counter = 0;
+       int shorter = 0;
+       //String longerWordTemp = "";
+       int result = longerWord(word1,word2);
+       Log.d("res", String.valueOf(result));
+
+       if (result==2)
+       {
+            counter = word2.length();
+            shorter = word1.length();
+            longerWordTemp = word2;
+       }
+       else
+       {
+            counter = word1.length();
+            shorter = word2.length();
+            longerWordTemp = word1 ;
+       }
+        int i = 0;
+       int idxw1 = 0;
+       int idxw2 = 0;
+       StringBuilder scrambledArray = new StringBuilder();
+       for( i=0; i < longerWordTemp.length();i++)
+       {
+           if (i < shorter)
+           {
+               if (random.nextBoolean()) {
+                   scrambledArray.append(word1.charAt(idxw1+i));
+                   idxw1++;
+               }
+               else
+               {
+                   scrambledArray.append(word2.charAt(idxw2+i));
+                   idxw2++;
+               }
+
+
+           }
+
+else {
+               scrambledArray.append(longerWordTemp.charAt());
+           }
+
+       }
+
+
+
+
+    System.out.println(scrambledArray);
+       Log.d("counter value", String.valueOf(counter));
 
         return true;
     }
 
+    public int longerWord (String a, String b)
+    {
+        if (a.length() > b.length())
+            return 1;
 
-    public boolean onUndo(View view) {
+        return 2;
+
+    }
+        public boolean onUndo(View view) {
         /**
          **
          **  YOUR CODE GOES HERE
