@@ -18,7 +18,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:divider="@android:drawable/divider_horizontal_textfield"
             android:orientation="vertical"
             android:showDividers="none">
@@ -48,6 +47,7 @@
                     android:textColor="#AE0010"
                     android:textSize="18sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -69,12 +69,12 @@
                     android:id="@+id/btnScoreTurnNum"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:background="#2c2b2a"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textColor="#AE0010"
                     android:textSize="18sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -96,7 +96,6 @@
                     android:id="@+id/btnScoreCompNum"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:background="#2c2b2a"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textColor="#AE0010"
@@ -139,6 +138,8 @@
             android:layout_height="match_parent"
             android:alpha="0.90"
             android:backgroundTint="#CF0010"
+            android:hapticFeedbackEnabled="true"
+            android:soundEffectsEnabled="false"
             android:text="ROLL" />
 
         <Button
@@ -147,6 +148,7 @@
             android:layout_height="match_parent"
             android:alpha="0.90"
             android:backgroundTint="#CF0010"
+            android:hapticFeedbackEnabled="true"
             android:text="HOLD" />
 
         <Button
@@ -155,6 +157,7 @@
             android:layout_height="match_parent"
             android:alpha="0.90"
             android:backgroundTint="#CF0010"
+            android:hapticFeedbackEnabled="true"
             android:text="RESET" />
     </LinearLayout>
 </LinearLayout>
