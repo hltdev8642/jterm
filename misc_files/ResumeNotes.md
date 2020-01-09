@@ -25,28 +25,28 @@
 		>[Z] -->
 
 ### Projects
-	- Again, focus on your impact
-		- Accomplished [X], as measured by [Y], by doing [Z]
-		- Course Projects
-			- Example:
-				```
-		[course #][course name][course description]
-		```
-		- Personal Projects
-		- Other Accomplishments/Credentials
+- Again, focus on your impact
+	- Accomplished [X], as measured by [Y], by doing [Z]
+	- Course Projects
+		- Example:
+			`[course #][course name][course description]`
+	- Personal Projects
+	- Other Accomplishments/Credentials
 ### Activities/Leadership
-	- Tell us what excites you.
-		- Clubs and organizations
-		- National society chapters
-		- Programming competitions/hackathons
-		- Internships
-		- Teaching Assistantships *
-		- Research opportunities
-		- Open Source projects
-		- Tech-focused developmental programs
-		\*Advantage(slight)
+- Tell us what excites you.
+	- Clubs and organizations
+	- National society chapters
+	- Programming competitions/hackathons
+	- Internships
+	- Teaching Assistantships *
+	- Research opportunities
+	- Open Source projects
+	- Tech-focused developmental programs
+	
+	\*Advantage(slight)
+
 ### Honors/Awards
-	-Award and description
+- Award and description
 
 ### Final Tips
 - Demonstrate your passion for tech.
