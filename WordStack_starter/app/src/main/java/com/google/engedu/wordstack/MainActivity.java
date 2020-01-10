@@ -113,11 +113,7 @@ public class MainActivity extends AppCompatActivity
                messageBox.setText(word1 + " " + word2);
             }
 
-            /**
-             **
-             **  YOUR CODE GOES HERE
-             **
-             **/
+            stackedLayout.push(tile);
             return true;
          }
 
@@ -159,17 +155,16 @@ public class MainActivity extends AppCompatActivity
                LetterTile tile = (LetterTile) event.getLocalState();
                tile.moveToViewGroup((ViewGroup) v);
 
+
+               TextView messageBox = (TextView) findViewById(R.id.message_box);
                if (stackedLayout.empty())
                {
-                  TextView messageBox = (TextView) findViewById(R.id.message_box);
                   messageBox.setText(word1 + " " + word2);
                }
 
-               /**
-                **
-                **  YOUR CODE GOES HERE
-                **
-                **/
+              // tile.moveToViewGroup((ViewGroup) messageBox.getParent());
+               stackedLayout.push(tile);
+
                return true;
          }
 
@@ -330,6 +325,8 @@ public class MainActivity extends AppCompatActivity
       }
 
       messageBox.setText(stringMerged);
+      Log.d("message", stringMerged);
+         stackedLayout.clear();
 
       char[] stringChars = stringMerged.toCharArray();
 

@@ -36,11 +36,10 @@ public class StackedLayout extends LinearLayout {
 
     public View pop() {
         View popped = null;
-        /**
-         **
-         **  YOUR CODE GOES HERE
-         **
-         **/
+        if(!tiles.isEmpty())
+        {
+           popped = tiles.pop();
+        }
         return popped;
     }
 
@@ -53,10 +52,11 @@ public class StackedLayout extends LinearLayout {
     }
 
     public void clear() {
-        /**
-         **
-         **  YOUR CODE GOES HERE
-         **
-         **/
+        this.removeAllViewsInLayout();
+
+        while(!tiles.isEmpty())
+        {
+            tiles.pop();
+        }
     }
 }
