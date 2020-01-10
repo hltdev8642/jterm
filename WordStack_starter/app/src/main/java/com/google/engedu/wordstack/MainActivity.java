@@ -35,244 +35,334 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+{
 
-    private static final int WORD_LENGTH = 5;
-    public static final int LIGHT_BLUE = Color.rgb(176, 200, 255);
-    public static final int LIGHT_GREEN = Color.rgb(200, 255, 200);
-    private ArrayList<String> words = new ArrayList<>();
-    private Random random = new Random();
-    private StackedLayout stackedLayout;
-    private String word1, word2;
+   private static final int WORD_LENGTH = 5;
+   public static final int LIGHT_BLUE = Color.rgb(176, 200, 255);
+   public static final int LIGHT_GREEN = Color.rgb(200, 255, 200);
+   private ArrayList<String> words = new ArrayList<>();
+   private Random random = new Random();
+   private StackedLayout stackedLayout;
+   private String word1, word2;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        AssetManager assetManager = getAssets();
-        try {
-            InputStream inputStream = assetManager.open("words.txt");
-            BufferedReader in = new BufferedReader(new InputStreamReader(inputStream));
-            String line = null;
-            while((line = in.readLine()) != null) {
-                String word = line.trim();
-                    if (isGoodWord(word))
-                    {
-                        //System.out.println(word);
-                        words.add(word);
+   @Override
+   protected void onCreate(Bundle savedInstanceState)
+   {
+      super.onCreate(savedInstanceState);
+      setContentView(R.layout.activity_main);
+      AssetManager assetManager = getAssets();
 
-                    }
-                /*
-                else
-                {
-                Log.d("Rejected: ", word);
-                }
-                Log.d("Added: ",words.toString());
-                */
+      try
+      {
+         InputStream inputStream = assetManager.open("words.txt");
+         BufferedReader in = new BufferedReader(new InputStreamReader(inputStream));
+         String line = null;
 
+         while((line = in.readLine()) != null)
+         {
+            String word = line.trim();
+
+            if (isGoodWord(word))
+            {
+               //System.out.println(word);
+               words.add(word);
             }
-        } catch (IOException e) {
-            Toast toast = Toast.makeText(this, "Could not load dictionary", Toast.LENGTH_LONG);
-            toast.show();
-        }
-        LinearLayout verticalLayout = (LinearLayout) findViewById(R.id.vertical_layout);
-        stackedLayout = new StackedLayout(this);
-        verticalLayout.addView(stackedLayout, 3);
 
-        View word1LinearLayout = findViewById(R.id.word1);
-        word1LinearLayout.setOnTouchListener(new TouchListener());
-        //word1LinearLayout.setOnDragListener(new DragListener());
-        View word2LinearLayout = findViewById(R.id.word2);
-        word2LinearLayout.setOnTouchListener(new TouchListener());
-        //word2LinearLayout.setOnDragListener(new DragListener());
-    }
+                  /*
+                  else
+                  {
+                  Log.d("Rejected: ", word);
+                  }
+                  Log.d("Added: ",words.toString());
+                  */
+         }
+      }
 
-    private class TouchListener implements View.OnTouchListener {
+      catch (IOException e)
+      {
+         Toast toast = Toast.makeText(this, "Could not load dictionary", Toast.LENGTH_LONG);
+         toast.show();
+      }
 
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            if (event.getAction() == MotionEvent.ACTION_DOWN && !stackedLayout.empty()) {
-                LetterTile tile = (LetterTile) stackedLayout.peek();
-                tile.moveToViewGroup((ViewGroup) v);
-                if (stackedLayout.empty()) {
-                    TextView messageBox = (TextView) findViewById(R.id.message_box);
-                    messageBox.setText(word1 + " " + word2);
-                }
-                /**
-                 **
-                 **  YOUR CODE GOES HERE
-                 **
-                 **/
-                return true;
+      LinearLayout verticalLayout = (LinearLayout) findViewById(R.id.vertical_layout);
+      stackedLayout = new StackedLayout(this);
+      verticalLayout.addView(stackedLayout, 3);
+      View word1LinearLayout = findViewById(R.id.word1);
+      word1LinearLayout.setOnTouchListener(new TouchListener());
+      //word1LinearLayout.setOnDragListener(new DragListener());
+      View word2LinearLayout = findViewById(R.id.word2);
+      word2LinearLayout.setOnTouchListener(new TouchListener());
+      //word2LinearLayout.setOnDragListener(new DragListener());
+   }
+
+   private class TouchListener implements View.OnTouchListener
+   {
+
+      @Override
+      public boolean onTouch(View v, MotionEvent event)
+      {
+         if (event.getAction() == MotionEvent.ACTION_DOWN && !stackedLayout.empty())
+         {
+            LetterTile tile = (LetterTile) stackedLayout.peek();
+            tile.moveToViewGroup((ViewGroup) v);
+
+            if (stackedLayout.empty())
+            {
+               TextView messageBox = (TextView) findViewById(R.id.message_box);
+               messageBox.setText(word1 + " " + word2);
             }
-            return false;
-        }
-    }
 
-    private class DragListener implements View.OnDragListener {
+            /**
+             **
+             **  YOUR CODE GOES HERE
+             **
+             **/
+            return true;
+         }
 
-        public boolean onDrag(View v, DragEvent event) {
-            int action = event.getAction();
-            switch (event.getAction()) {
-                case DragEvent.ACTION_DRAG_STARTED:
-                    v.setBackgroundColor(LIGHT_BLUE);
-                    v.invalidate();
-                    return true;
-                case DragEvent.ACTION_DRAG_ENTERED:
-                    v.setBackgroundColor(LIGHT_GREEN);
-                    v.invalidate();
-                    return true;
-                case DragEvent.ACTION_DRAG_EXITED:
-                    v.setBackgroundColor(LIGHT_BLUE);
-                    v.invalidate();
-                    return true;
-                case DragEvent.ACTION_DRAG_ENDED:
-                    v.setBackgroundColor(Color.WHITE);
-                    v.invalidate();
-                    return true;
-                case DragEvent.ACTION_DROP:
-                    // Dropped, reassign Tile to the target Layout
-                    LetterTile tile = (LetterTile) event.getLocalState();
-                    tile.moveToViewGroup((ViewGroup) v);
-                    if (stackedLayout.empty()) {
-                        TextView messageBox = (TextView) findViewById(R.id.message_box);
-                        messageBox.setText(word1 + " " + word2);
-                    }
-                    /**
-                     **
-                     **  YOUR CODE GOES HERE
-                     **
-                     **/
-                    return true;
-            }
-            return false;
-        }
-    }
+         return false;
+      }
+   }
 
-    public boolean onStartGame(View view) {
-        TextView messageBox = (TextView) findViewById(R.id.message_box);
-        messageBox.setText("Game started");
-        /**
-         **
-         **  YOUR CODE GOES HERE
-         **
-         * onStartGame
-         * Next, start implementing onStartGame.
-         * You will need to randomly pick two words from words
-         * (be sure to store them in the fields named word1
-         * and word2 so that the answer is given when the game is over).
-         * Find a way to shuffle the letters of the words while preserving word order.
-         * The simplest way to do that is probably to create a counter for each word
-         * and randomly pick which word to grab a letter from and increment that counter
-         * until either word runs out and then pick all the letters in the word that
-         * was not exhausted. Write your scrambled string to the messageBox.
-         *
-         * Instead of just printing the scrambled string to messageBox,
-         * create new LetterTile objects representing each letter of the
-         * string and push them (in reverse order!) onto stackedLayout.
-         **/
+   private class DragListener implements View.OnDragListener
+   {
 
-       word1 =  words.get((int) (Math.random()*words.size()));
-       word2 = words.get((int) (Math.random()*words.size()));
+      public boolean onDrag(View v, DragEvent event)
+      {
+         int action = event.getAction();
 
-        Log.d("word 1", word1);
-        Log.d("word 2", word2);
-        //Log.d(null," ");
+         switch (event.getAction())
+         {
+            case DragEvent.ACTION_DRAG_STARTED:
+               v.setBackgroundColor(LIGHT_BLUE);
+               v.invalidate();
+               return true;
 
-        /*
-        int counterWord1 = word1.length();
-        int counterWord2 = word2.length();
-        char[] w1charArr = word1.toCharArray();
-        char[] w2charArr = word2.toCharArray();
-        char[] wordsarr = new char[counterWord1+counterWord2];
-        //char comboCharArr;
-        while( ((counterWord1 != 0) && (counterWord2 != 0)))
-        {
-                    int idx1 = (int) (Math.random()*w1charArr.length);
-            int idx2 = (int) (Math.random()*w2charArr.length);
+            case DragEvent.ACTION_DRAG_ENTERED:
+               v.setBackgroundColor(LIGHT_GREEN);
+               v.invalidate();
+               return true;
 
-            String tmp = word1.toString().charAt(idx1).concat(word2.toString().charAt(idx2));
-            wordsarr[Math.abs(idx1%idx2)] = tmp;
+            case DragEvent.ACTION_DRAG_EXITED:
+               v.setBackgroundColor(LIGHT_BLUE);
+               v.invalidate();
+               return true;
 
-        }
-        Log.d("wordsarr output", wordsarr);
-    */
+            case DragEvent.ACTION_DRAG_ENDED:
+               v.setBackgroundColor(Color.WHITE);
+               v.invalidate();
+               return true;
 
-       int counter = 0;
-       int shorter = 0;
-       //String longerWordTemp = "";
-       int result = longerWord(word1,word2);
-       Log.d("res", String.valueOf(result));
+            case DragEvent.ACTION_DROP:
+               // Dropped, reassign Tile to the target Layout
+               LetterTile tile = (LetterTile) event.getLocalState();
+               tile.moveToViewGroup((ViewGroup) v);
 
-       if (result==2)
-       {
-            counter = word2.length();
-            shorter = word1.length();
-            longerWordTemp = word2;
-       }
-       else
-       {
-            counter = word1.length();
-            shorter = word2.length();
-            longerWordTemp = word1 ;
-       }
-        int i = 0;
-       int idxw1 = 0;
-       int idxw2 = 0;
-       StringBuilder scrambledArray = new StringBuilder();
-       for( i=0; i < longerWordTemp.length();i++)
-       {
-           if (i < shorter)
-           {
-               if (random.nextBoolean()) {
-                   scrambledArray.append(word1.charAt(idxw1+i));
-                   idxw1++;
-               }
-               else
+               if (stackedLayout.empty())
                {
-                   scrambledArray.append(word2.charAt(idxw2+i));
-                   idxw2++;
+                  TextView messageBox = (TextView) findViewById(R.id.message_box);
+                  messageBox.setText(word1 + " " + word2);
                }
 
+               /**
+                **
+                **  YOUR CODE GOES HERE
+                **
+                **/
+               return true;
+         }
 
-           }
+         return false;
+      }
+   }
 
-else {
-               scrambledArray.append(longerWordTemp.charAt());
-           }
+   public boolean onStartGame(View view)
+   {
+      TextView messageBox = (TextView) findViewById(R.id.message_box);
+      messageBox.setText("Game started");
+      /**
+       **
+       **  YOUR CODE GOES HERE
+       **
+       * onStartGame
+       * Next, start implementing onStartGame.
+       * You will need to randomly pick two words from words
+       * (be sure to store them in the fields named word1
+       * and word2 so that the answer is given when the game is over).
+       * Find a way to shuffle the letters of the words while preserving word order.
+       * The simplest way to do that is probably to create a counter for each word
+       * and randomly pick which word to grab a letter from and increment that counter
+       * until either word runs out and then pick all the letters in the word that
+       * was not exhausted. Write your scrambled string to the messageBox.
+       *
+       * Instead of just printing the scrambled string to messageBox,
+       * create new LetterTile objects representing each letter of the
+       * string and push them (in reverse order!) onto stackedLayout.
+       **/
+      word1 =  words.get((int) (Math.random() * words.size()));
+      word2 = words.get((int) (Math.random() * words.size()));
+      Log.d("word 1", word1);
+      Log.d("word 2", word2);
+      //Log.d(null," ");
+      /*
+      int counterWord1 = word1.length();
+      int counterWord2 = word2.length();
+      char[] w1charArr = word1.toCharArray();
+      char[] w2charArr = word2.toCharArray();
+      char[] wordsarr = new char[counterWord1+counterWord2];
+      //char comboCharArr;
+      while( ((counterWord1 != 0) && (counterWord2 != 0)))
+      {
+                  int idx1 = (int) (Math.random()*w1charArr.length);
+          int idx2 = (int) (Math.random()*w2charArr.length);
 
+          String tmp = word1.toString().charAt(idx1).concat(word2.toString().charAt(idx2));
+          wordsarr[Math.abs(idx1%idx2)] = tmp;
+
+      }
+      Log.d("wordsarr output", wordsarr);
+      */
+      /*
+
+      int counter = 0;
+      int shorter = 0;
+      String longerWordTemp = new String();
+      int result = longerWord(word1,word2);
+      Log.d("res", String.valueOf(result));
+
+      if (result==2)
+      {
+       counter = word2.length();
+       shorter = word1.length();
+       longerWordTemp = word2;
+      }
+      else
+      {
+       counter = word1.length();
+       shorter = word2.length();
+       longerWordTemp = word1;
+      }
+      int idxw1 = 0;
+      int idxw2 = 0;
+      StringBuilder scrambledArray = new StringBuilder();
+      for( int i=0; i < ;i++)
+      {
+       if (i < shorter) {
+          if (random.nextBoolean()) {
+             scrambledArray.append(word1.charAt(i));
+          } else {
+             scrambledArray.append(word2.charAt(i));
+          }
        }
 
+       else{
+          scrambledArray.append(longerWordTemp.charAt(i));
+       }
+
+      //          if (i>shorter)
+      //         {
+      //
+      //            scrambledArray.append(longerWordTemp.split("")[i]);
+      //         }
+
+      }
 
 
+      Log.d("SCR",String.valueOf(scrambledArray));
+      Log.d("counter value", String.valueOf(counter));
 
-    System.out.println(scrambledArray);
-       Log.d("counter value", String.valueOf(counter));
+      return true;
+      */
+      String stringMerged = "";
+      int longerWord = 0;
+      int shorterWord = 0;
+      int i;
+      stackedLayout.clear();
+      int counterWord1 = random.nextInt(words.size());
+      int counterWord2 = random.nextInt(words.size());
 
-        return true;
-    }
+      if (counterWord2 == counterWord1)
+      {
+         counterWord2 = random.nextInt(words.size());
+         while (counterWord2 == counterWord1) {
+            counterWord2 = random.nextInt(words.size());
+         }
+      }
 
-    public int longerWord (String a, String b)
-    {
-        if (a.length() > b.length())
-            return 1;
+      word1 = words.get(counterWord1);
+      word2 = words.get(counterWord2);
+      Boolean whichChar = random.nextBoolean();
 
-        return 2;
+      if (longerWord < word1.length() && shorterWord < word2.length())
+      {
+         stringMerged += whichChar ? word1.charAt(longerWord++) : word2.charAt(shorterWord++);
+         whichChar = random.nextBoolean();
 
-    }
-        public boolean onUndo(View view) {
-        /**
-         **
-         **  YOUR CODE GOES HERE
-         **
-         **/
-        return true;
-    }
+         while (longerWord < word1.length() && shorterWord < word2.length())
+         {
+            stringMerged += whichChar ? word1.charAt(longerWord++) : word2.charAt(shorterWord++);
+            whichChar = random.nextBoolean();
+         }
+      }
 
-    public boolean isGoodWord (String word)
-    {
-        return word.length() <= WORD_LENGTH;
+      if(longerWord >= word1.length() && shorterWord < word2.length())
+      {
+         stringMerged += word2.charAt(shorterWord++);
 
-    }
+         while (shorterWord < word2.length())
+         {
+            stringMerged += word2.charAt(shorterWord++);
+         }
+      }
+
+      else
+      {
+         if (longerWord < word1.length())
+         {
+            stringMerged += word1.charAt(longerWord++);
+
+            while (longerWord < word1.length())
+            {
+               stringMerged += word1.charAt(longerWord++);
+            }
+         }
+      }
+
+      messageBox.setText(stringMerged);
+
+      char[] stringChars = stringMerged.toCharArray();
+
+      for(char c : stringChars)
+      {
+         stackedLayout.push(new LetterTile(this,c));
+      }
+
+      return true;
+   }
+
+   public int longerWord (String a, String b)
+   {
+      if (a.length() > b.length())
+      {
+         return 1;
+      }
+
+      return 2;
+   }
+   public boolean onUndo(View view)
+   {
+      /**
+       **
+       **  YOUR CODE GOES HERE
+       **
+       **/
+      return true;
+   }
+
+   public boolean isGoodWord (String word)
+   {
+      return word.length() <= WORD_LENGTH;
+   }
 }
 
