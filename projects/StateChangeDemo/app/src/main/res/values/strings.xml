@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">StateChangeDemo</string>
+    <string name="state_change_textedit_text">Hello World</string>
+</resources>
