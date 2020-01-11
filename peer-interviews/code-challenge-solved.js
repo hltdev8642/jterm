@@ -1,6 +1,10 @@
 var map1 = new Map();
 
-var str = "abcbcsdofa";
+var args = process.argv;
+//console.log(args);
+var idx = 0
+var arg = args.slice("")[idx+2]
+var str = arg;
 
 console.log("Input String:",str);
 var tmp = "";
