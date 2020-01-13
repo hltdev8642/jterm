@@ -17,19 +17,14 @@ package com.google.engedu.ghost;
 
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Random;
 
 
@@ -50,6 +45,14 @@ public class GhostActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        /*
+        //test for isAlpha() method
+        Log.d("[d]",String.valueOf(isAlpha('d')));
+        Log.d("[1]",String.valueOf(isAlpha('1')));
+        Log.d("[!]",String.valueOf(isAlpha('!')));
+        */
+
     }
 
     @Override
@@ -101,28 +104,27 @@ public class GhostActivity extends AppCompatActivity {
         label.setText(USER_TURN);
     }
 
-    /**
+    /*
      * Handler for user key presses.
      * @param keyCode
      * @param event
      * @return whether the key stroke was handled.
      */
+
     @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        boolean test = isAlpha(event.getNumber());
-        Log.d("isLetter", String.valueOf(test));
-        return super.onKeyUp(keyCode, event);
-    }
-
-    public boolean isAlpha(char name) {
-        char[] chars = name.sp
-
-        for (char c : chars) {
-            if(!Character.isLetter(c)) {
-                return false;
-            }
+    public boolean onKeyUp(int keyCode, KeyEvent event)
+    {
+        TextView text = (TextView) findViewById(R.id.ghostText);
+        if (isAlpha((char) event.getUnicodeChar())) {
+            Log.d("Is Alphanumeric", String.valueOf((char) event.getUnicodeChar()));
+            text.append(String.valueOf((char) event.getUnicodeChar()));
+            return true;
+        }
+          return super.onKeyUp(keyCode, event);
         }
 
-        return true;
+    public boolean isAlpha(char name)
+    {
+       return Character.isLetter(name);
     }
 }
