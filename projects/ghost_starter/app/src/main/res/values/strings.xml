@@ -3,8 +3,7 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="buttonResetText">Reset</string>
+    <string name="buttonChallengeText">Challenge</string>
     <string name="starting_game">Starting game</string>
-    <string name="ghostTextContents" />
-    <string name="reset">Reset</string>
-    <string name="challenge">Challenge</string>
 </resources>

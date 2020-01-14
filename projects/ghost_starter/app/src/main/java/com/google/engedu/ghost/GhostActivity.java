@@ -23,6 +23,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import java.io.IOException;
 import java.util.Random;
@@ -31,6 +32,8 @@ import java.util.Random;
 public class GhostActivity extends AppCompatActivity {
     private static final String COMPUTER_TURN = "Computer's turn";
     private static final String USER_TURN = "Your turn";
+    private static final String COMPUTER_WINS = "Computer Wins";
+    private static final String USER_WINS = "User Wins";
     private GhostDictionary dictionary;
     private boolean userTurn = false;
     private Random random = new Random();
@@ -41,11 +44,28 @@ public class GhostActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ghost);
         AssetManager assetManager = getAssets();
         try {
-            SimpleDictionary words = new SimpleDictionary(assetManager.open("words.txt"));
+            dictionary = new SimpleDictionary(assetManager.open("words.txt"));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        Button buttonReset = (Button) findViewById(R.id.buttonReset);
+        buttonReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            Log.d("Reset","- - -");
+            resetGame();
+            }
+            });
+
+
+
+        Button buttonChallenge = (Button) findViewById(R.id.buttonChallenge);
+        buttonChallenge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
         /*
         //test for isAlpha() method
         Log.d("[d]",String.valueOf(isAlpha('d')));
@@ -53,6 +73,12 @@ public class GhostActivity extends AppCompatActivity {
         Log.d("[!]",String.valueOf(isAlpha('!')));
         */
 
+        onStart(null);
+    }
+
+    public void resetGame ()
+    {
+        onStart(null);
     }
 
     @Override
@@ -85,23 +111,27 @@ public class GhostActivity extends AppCompatActivity {
      */
     public boolean onStart(View view) {
         userTurn = random.nextBoolean();
-        TextView text = (TextView) findViewById(R.id.ghostText);
-        text.setText("");
-        TextView label = (TextView) findViewById(R.id.gameStatus);
+        TextView ghostText = (TextView) findViewById(R.id.ghostText);
+        ghostText.setText("");
+        TextView textIsWordDebug = (TextView) findViewById(R.id.textIsWordDebug);
+        textIsWordDebug.setText("");
+
         if (userTurn) {
-            label.setText(USER_TURN);
+            textIsWordDebug.setText(USER_TURN);
         } else {
-            label.setText(COMPUTER_TURN);
+            textIsWordDebug.setText(COMPUTER_TURN);
             computerTurn();
         }
         return true;
     }
 
     private void computerTurn() {
-        TextView label = (TextView) findViewById(R.id.gameStatus);
+        TextView textGameStatus = (TextView) findViewById(R.id.textGameStatus);
+        TextView ghostText = (TextView) findViewById(R.id.ghostText);
+
         // Do computer turn stuff then make it the user's turn again
         userTurn = true;
-        label.setText(USER_TURN);
+        textGameStatus.setText(USER_TURN);
     }
 
     /*
@@ -114,17 +144,52 @@ public class GhostActivity extends AppCompatActivity {
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event)
     {
-        TextView text = (TextView) findViewById(R.id.ghostText);
+        TextView ghostText = findViewById(R.id.ghostText);
+        TextView textIsWordDebug = findViewById(R.id.textIsWordDebug);
+        TextView textGameStatus = (TextView) findViewById(R.id.textGameStatus);
+
         if (isAlpha((char) event.getUnicodeChar())) {
             Log.d("Is Alphanumeric", String.valueOf((char) event.getUnicodeChar()));
-            text.append(String.valueOf((char) event.getUnicodeChar()));
+            ghostText.append(String.valueOf((char) event.getUnicodeChar()));
+            if (dictionary.isWord(ghostText.getText().toString()))
+            {
+                Log.d("Is a Word", ghostText.getText().toString());
+                textIsWordDebug.setText(ghostText.getText().toString());
+                textGameStatus.setText(getWinner(ghostText.getText().toString()));
+                String result = dictionary.getAnyWordStartingWith(ghostText.getText().toString());
+                Log.d("result",result);
+            }
+            else
+            {
+                Log.d("Not a word","");
+            }
             return true;
         }
-          return super.onKeyUp(keyCode, event);
+        return super.onKeyUp(keyCode, event);
+    }
+
+    public String getWinner(String textWord)
+    {
+
+        return userTurn && textWord.length() >= 4 ? COMPUTER_WINS : USER_WINS;
+    }
+
+   /* public boolean largerWordExists (String textWord)
+    {
+        if (dictionary.getAnyWordStartingWith())
+        {
+
         }
+
+        else
+        {
+
+        }
+    }*/
 
     public boolean isAlpha(char name)
     {
-       return Character.isLetter(name);
+        return Character.isLetter(name);
     }
+
 }

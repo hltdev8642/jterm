@@ -27,43 +27,45 @@
     tools:context=".GhostActivity">
 
     <TextView
+        android:id="@+id/textIsWordDebug"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
         android:id="@+id/ghostText"
-        style="@android:style/Widget.Material.TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="48sp" />
 
     <TextView
-        android:id="@+id/gameStatus"
-        style="@android:style/Widget.Material.TextView"
+        android:id="@+id/textGameStatus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/starting_game"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="9dp" />
-
     <LinearLayout
+        android:id="@+id/layButtons"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_height="match_parent"
+        android:gravity="center|fill_horizontal|fill_vertical"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/buttonChallenge"
-            style="@android:style/Widget.Material.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/challenge" />
+            android:layout_weight="1"
+            android:text="@string/buttonChallengeText" />
 
         <Button
-            android:id="@+id/button2"
-            style="@android:style/Widget.Material.Button"
+            android:id="@+id/buttonReset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/reset" />
+            android:layout_weight="1"
+            android:text="@string/buttonResetText" />
     </LinearLayout>
+
 
 </LinearLayout>

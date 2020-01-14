@@ -20,9 +20,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Set;
 
 public class SimpleDictionary implements GhostDictionary {
     private ArrayList<String> words;
+    public Set<String> finder;
 
     public SimpleDictionary(InputStream wordListStream) throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(wordListStream));
@@ -32,6 +34,7 @@ public class SimpleDictionary implements GhostDictionary {
             String word = line.trim();
             if (word.length() >= MIN_WORD_LENGTH)
               words.add(line.trim());
+            finder.add(line.trim());
         }
     }
 
@@ -50,4 +53,75 @@ public class SimpleDictionary implements GhostDictionary {
         String selected = null;
         return selected;
     }
+
+
+    Set<String> finder = new Set<String>() {
+        @Override
+        public int size() {
+            return 0;
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return false;
+        }
+
+        @Override
+        public boolean contains(@Nullable Object o) {
+            return false;
+        }
+
+        @NonNull
+        @Override
+        public Iterator<String> iterator() {
+            return null;
+        }
+
+        @Nullable
+        @Override
+        public Object[] toArray() {
+            return new Object[0];
+        }
+
+        @Override
+        public <T> T[] toArray(@Nullable T[] ts) {
+            return null;
+        }
+
+        @Override
+        public boolean add(String s) {
+            return false;
+        }
+
+        @Override
+        public boolean remove(@Nullable Object o) {
+            return false;
+        }
+
+        @Override
+        public boolean containsAll(@NonNull Collection<?> collection) {
+            return false;
+        }
+
+        @Override
+        public boolean addAll(@NonNull Collection<? extends String> collection) {
+            return false;
+        }
+
+        @Override
+        public boolean retainAll(@NonNull Collection<?> collection) {
+            return false;
+        }
+
+        @Override
+        public boolean removeAll(@NonNull Collection<?> collection) {
+            return false;
+        }
+
+        @Override
+        public void clear() {
+
+        }
+    };
+
 }
