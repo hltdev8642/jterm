@@ -1,0 +1,3 @@
+include ':app', ':easyaccordion'
+rootProject.name='accord'
+project(':easyaccordion').projectDir = new File('app/libs/easyaccordion')
